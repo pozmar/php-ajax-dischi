@@ -1,6 +1,4 @@
-<?php
-require_once __DIR__ . '/vars.php'
-?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -24,7 +22,7 @@ require_once __DIR__ . '/vars.php'
     <main>
       <div class="container-flex">
         <div class="selection">
-          <select>
+          <select v-model="selectedGenre">
             <option value="">Tutti</option>
             <option value="Pop">Pop</option>
             <option value="Rock">Rock</option>
@@ -32,23 +30,17 @@ require_once __DIR__ . '/vars.php'
             <option value="Jazz">Jazz</option>
           </select>
         </div>
-        
-        <?php foreach($dischi['response'] as $k => $v):
-          echo "<div class='box'>"
-          ?>      
-            <img src= <?=$v["poster"];?> alt="">
-            <h2><?= $v["title"]; ?></h2>
-            <h4><?= $v["author"]; ?></h4>
-            <h4><?= $v["year"]; ?></h4>
-            <?php
-        
-          echo"</div>";
-          endforeach;
-          ?>
-        
+        <div class="box" v-for="cd in filteredCds">
+          <img :src="cd.poster" alt="">
+          <h2>{{ cd.title }}</h2>
+          <h4>{{ cd.author }}</h4>
+          <h4>{{ cd.year }}</h4>
+
+        </div>
       </div>
     </main>
   </div>
+  <!-- main script -->
+  <script src="main.js" charset="utf-8"></script>
 </body>
 </html>
-
